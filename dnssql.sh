@@ -49,8 +49,10 @@ function processar(){
 		echo Arquivo \"$2\" nao existe\/ nao foi encontrado\/ ou nao ha permissao para acesso
 		exit 1
 	fi
-	cat $1 | egrep -w "A|CNAME" |sed -e "s/	/ /g" -e "s///g" -e "s/IN//g" | xargs -i .$BINARIO cadastrar {}
-	cat $2 | egrep -w "A|CNAME" |sed -e "s/	/ /g" -e "s///g" -e "s/IN//g" | xargs -i .$BINARIO conflitar {} 
+	cat $1 | egrep -w "A|CNAME" |sed -e "s/	/ /g" -e "s/
+//g" -e "s/IN//g" | xargs -i $BINARIO cadastrar {}
+	cat $2 | egrep -w "A|CNAME" |sed -e "s/	/ /g" -e "s/
+//g" -e "s/IN//g" | xargs -i $BINARIO conflitar {} 
 }
 function processar2(){
 	if [ ! -f $1 ] 
@@ -58,7 +60,8 @@ function processar2(){
 		echo Arquivo \"$1\" nao existe\/ nao foi encontrado\/ ou nao ha permissao para acesso
 		exit 1
 	fi
-	cat $1 | egrep -w "A|CNAME" |sed -e "s/	/ /g" -e "s///g" -e "s/IN//g" | xargs -i .$BINARIO conflitar {} 
+	cat $1 | egrep -w "A|CNAME" |sed -e "s/	/ /g" -e "s/
+//g" -e "s/IN//g" | xargs -i $BINARIO conflitar {} 
 }
 function faltaargumento() {
 	clear
