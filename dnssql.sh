@@ -1,6 +1,7 @@
 #!/bin/bash
 #Alexandre D'Amato
 export BASENAME=base.db
+export BINARIO=$0
 function ajuda() {
 	echo -e "############################################################################\n"
 	echo SCRIPT PARA CONFLITAR REGISTROS DNS E GERAR SAIDA DE MODIFICACAO PARA CLI53 
@@ -48,8 +49,8 @@ function processar(){
 		echo Arquivo \"$2\" nao existe\/ nao foi encontrado\/ ou nao ha permissao para acesso
 		exit 1
 	fi
-	cat $1 | egrep -w "A|CNAME" |sed -e "s/	/ /g" -e "s///g" -e "s/IN//g" | xargs -i ./dnssql.sh cadastrar {}
-	cat $2 | egrep -w "A|CNAME" |sed -e "s/	/ /g" -e "s///g" -e "s/IN//g" | xargs -i ./dnssql.sh conflitar {} 
+	cat $1 | egrep -w "A|CNAME" |sed -e "s/	/ /g" -e "s///g" -e "s/IN//g" | xargs -i .$BINARIO cadastrar {}
+	cat $2 | egrep -w "A|CNAME" |sed -e "s/	/ /g" -e "s///g" -e "s/IN//g" | xargs -i .$BINARIO conflitar {} 
 }
 function processar2(){
 	if [ ! -f $1 ] 
@@ -57,7 +58,7 @@ function processar2(){
 		echo Arquivo \"$1\" nao existe\/ nao foi encontrado\/ ou nao ha permissao para acesso
 		exit 1
 	fi
-	cat $1 | egrep -w "A|CNAME" |sed -e "s/	/ /g" -e "s///g" -e "s/IN//g" | xargs -i ./dnssql.sh conflitar {} 
+	cat $1 | egrep -w "A|CNAME" |sed -e "s/	/ /g" -e "s///g" -e "s/IN//g" | xargs -i .$BINARIO conflitar {} 
 }
 function faltaargumento() {
 	clear
